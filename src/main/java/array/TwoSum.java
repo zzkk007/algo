@@ -1,5 +1,7 @@
 package array;
 
+import java.util.HashMap;
+
 /**
  * 计算两数之和
  * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
@@ -17,7 +19,9 @@ public class TwoSum {
 
     /**
      * 第一种方法：使用暴力破解法，所谓的暴力法就是对数组进行多次遍历
+     *  时间复杂度：O(N^2) 其中 NN 是数组中的元素数量。最坏情况下数组中任意两个数都要被匹配一次。
      *
+     * 空间复杂度：O(1)O(1)。
      * @param nums   数组
      * @param target 目标值
      * @return
@@ -35,6 +39,50 @@ public class TwoSum {
         return null;
     }
 
+    /**
+     * 第二种方法：两次遍历数组, 以空间复杂度代替时间复杂度
+     * @param nums 数组
+     * @param target 目标值
+     * @return
+     */
+    public static int[] testTwo(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++){
+            int other = target - nums[i];
+            if (map.containsKey(other)){
+                return new int[]{i, map.get(other)};
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * 第三种方法， 一次遍历数组
+     * @param nums 数组
+     * @param target 目标值
+     * @return
+     */
+    public static int[] testThree(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++){
+            int other = target - nums[i];
+            if (map.containsKey(other)){
+                return new int[]{i, map.get(other)};
+            }
+            map.put(nums[i], i);
+        }
+
+        return null;
+    }
+
+
     public static void main(String[] args) {
 
         int target = 9;
@@ -46,5 +94,20 @@ public class TwoSum {
             System.out.println(i);
         }
 
+        System.out.println("===================");
+
+        int[] ints2 = testTwo(intArray, target);
+        System.out.println("====================");
+        for (int i : ints2) {
+            System.out.println(i);
+        }
+
+        System.out.println("====================");
+
+        int[] ints3 = testTwo(intArray, target);
+        System.out.println("====================");
+        for (int i : ints3) {
+            System.out.println(i);
+        }
     }
 }
