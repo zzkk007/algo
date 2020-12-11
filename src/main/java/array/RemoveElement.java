@@ -28,17 +28,25 @@ package array;
  */
 public class RemoveElement {
 
-
+    /**
+     * 当 nums[j]nums[j] 与给定的值相等时，递增 jj 以跳过该元素。只要 nums[j] != target
+     * 我们就复制 nums[j]到 nums[i] 并同时递增两个索引。重复这一过程，直到 j 到达数组的末尾，该数组的新长度为 i。
+     * 该解法与 删除排序数组中的重复项 的解法十分相似。
+     *
+     * @param nums   数组
+     * @param target 目标值
+     * @return
+     */
     public static int testOne(int[] nums, int target) {
 
-        int j = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != target) {
-                nums[j] = nums[i];
-                j++;
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != target) {
+                nums[i] = nums[j];
+                i++;
             }
         }
-        return j;
+        return i;
     }
 
 
